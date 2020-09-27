@@ -33,4 +33,4 @@ app.use('/styles', express.static('styles'));
 app.use('/scripts', express.static('scripts'));
 app.listen(process.env.port || 3000);
 
-console.log('Running at Port 3000');
+console.log(`Running at Port ${process.env.port || 3000}`);
