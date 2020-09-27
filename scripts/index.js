@@ -4,7 +4,6 @@ const $_STEPS = document.getElementsByClassName('step')
 const $_RESULTS = document.getElementsByClassName('result')
 const $_PASSPORT_EXPIRY_DATE = document.getElementById('passportExpiryDate')
 const $_VISA_EXPIRY_DATE = document.getElementById('visaExpiryDate')
-const MIN_DATE = new Date().toISOString().substring(0, 10);
 
 let passportExpiryDate = null
 let visaExpiryDate = null
@@ -12,8 +11,45 @@ let visaApplyDate = null
 let visaApplyAltDate = null
 let passportValidDate = null
 
-$_PASSPORT_EXPIRY_DATE.setAttribute('min', MIN_DATE)
-$_VISA_EXPIRY_DATE.setAttribute('min', MIN_DATE)
+datepicker('#visaExpiryDate', {
+  minDate: new Date(),
+  formatter: (input, date) => {
+    const VALUE = date.toLocaleDateString()
+
+    input.value = VALUE
+  },
+  onSelect: (instance, date) => {
+    visaExpiryDate = date
+    
+    const $_BUTTON = document.getElementById("toThirdStepButton")
+
+    if (date) {
+      $_BUTTON.disabled = false
+    } else {
+      $_BUTTON.disabled = true
+    }
+  }
+})
+
+datepicker('#passportExpiryDate', {
+  minDate: new Date(),
+  formatter: (input, date) => {
+    const VALUE = date.toLocaleDateString()
+
+    input.value = VALUE
+  },
+  onSelect: (instance, date) => {
+    passportExpiryDate = date
+
+    const $_BUTTON = document.getElementById("toFourthStepButton")
+
+    if (date) {
+      $_BUTTON.disabled = false
+    } else {
+      $_BUTTON.disabled = true
+    }
+  }
+})
 
 selectStep("firstStep")
 
@@ -29,15 +65,8 @@ function selectStep(id) {
   window.scrollTo(0, 0);
 }
 
-function selectPassportExpiryDate(input) {
-  passportExpiryDate = new Date(input.value)
-}
-
-function selectVisaExpiryDate(input) {
-  visaExpiryDate = new Date(input.value)
-}
-
 function changeButtonState(input, id) {
+  debugger
   const $_BUTTON = document.getElementById(id)
 
   if (input.value) {

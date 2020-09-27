@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="shortcut icon" href="static/favicons/favicon.ico" type="image/x-icon">
   <title>Visa calculator</title>
+  <link rel="stylesheet" href="styles/libs/datepicker/datepicker.css">
   <link rel="stylesheet" href="styles/libs/smartphoto/smartphoto.css">
   <link rel="stylesheet" href="styles/index.css">
 </head>
@@ -85,13 +86,11 @@
         </p>
         <p>
           Выбери эту дату на календаре:
-          <input type="date" id="visaExpiryDate"
-            onchange="selectVisaExpiryDate(this); changeButtonState(this, 'toThirdStepButton')">
+          <input type="text" placeholder="Выбрать дату" id="visaExpiryDate">
         </p>
         <div class="divider"></div>
         <div class="button-group">
-          <button type="button" onclick="selectStep('thirdStep');" id="toThirdStepButton"
-            disabled>
+          <button type="button" onclick="selectStep('thirdStep');" id="toThirdStepButton" disabled>
             Далее
           </button>
           <button type="button" onclick="selectStep('firstStep')">
@@ -114,12 +113,12 @@
         </p>
         <p>
           Выбери эту дату на календаре:
-          <input type="date" id="passportExpiryDate"
-            onchange="selectPassportExpiryDate(this); changeButtonState(this, 'toFourthStepButton')">
+          <input type="text" placeholder="Выбрать дату" id="passportExpiryDate">
         </p>
         <div class="divider"></div>
         <div class="button-group">
-          <button type="button" onclick="selectStep('fourthStep'); calculateResults();" id="toFourthStepButton" disabled>
+          <button type="button" onclick="selectStep('fourthStep'); calculateResults();" id="toFourthStepButton"
+            disabled>
             Далее
           </button>
           <button type="button" onclick="selectStep('secondStep')">
@@ -188,6 +187,8 @@
       Регистрационно-визовый отдел ПетрГУ, 2020 г.
     </small>
   </footer>
+
+  <script type="text/javascript" src="scripts/libs/datepicker/datepicker.js"></script>
   <script type="text/javascript" src="scripts/libs/smartphoto/smartphoto.js"></script>
   <script type="text/javascript" src="scripts/index.js"></script>
 </body>
