@@ -2,7 +2,6 @@
   "name": "visa-calculator",
   "version": "1.0.0",
   "description": "Visa application deadline calculator",
-  "main": "index.js",
   "engines": {
     "node": "12.x"
   },

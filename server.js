@@ -28,9 +28,10 @@ router.get('/zh', function (req, res) {
 });
 
 app.use('/', router);
+app.use('/pages', express.static('pages'));
 app.use('/static', express.static('static'));
 app.use('/styles', express.static('styles'));
 app.use('/scripts', express.static('scripts'));
-app.listen(process.env.port || 3000);
+app.listen(process.env.PORT || 5000);
 
-console.log(`Running at Port ${process.env.port || 3000}`);
+console.log(`Running at http://localhost:${process.env.PORT || 5000}`);
