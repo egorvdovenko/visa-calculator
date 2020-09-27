@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="static/favicons/favicon.ico" type="image/x-icon">
+  <title>Visa calculator</title>
+  <link rel="stylesheet" href="styles/libs/datepicker/datepicker.css">
+  <link rel="stylesheet" href="styles/libs/smartphoto/smartphoto.css">
+  <link rel="stylesheet" href="styles/index.css">
+</head>
+
+<body>
+  <header>
+    <a id="indexLink" href="/">
+      <object type="image/svg+xml" data="static/icons/passport-icon.svg"></object>
+      Visa calculator
+    </a>
+  </header>
+  <main class="container container_main">
+    <div class="step" id="firstStep">
+      <section>
+        <p>Уважаемый иностранный студент ПетрГУ! На этом сайте ты можешь узнать ответы на два важных вопроса:</p>
+        <ul>
+          <li>
+            Когда тебе сдавать документы на продление визы?
+          </li>
+          <li>
+            Когда тебе нужно менять паспорт?
+          </li>
+        </ul>
+        <p>Напоминаем тебе, что в соответствии с действующим законодательством РФ:</p>
+        <ul>
+          <li>
+            Документы на продление визы подаются не менее чем за
+            <a href="#firstFootnote">20 рабочих дней (календарный месяц)<sup>1</sup></a>
+            до окончания действующей визы при наличии действующего паспорта;
+          </li>
+          <li>
+            При подаче документов на продление визы твой паспорт должен быть действителен
+            <a href="#secondFootnote">не менее 18 месяцев<sup>2</sup></a>
+            с даты начала действия следующей визы;
+          </li>
+        </ul>
+        <p>
+          Узнай ответы на эти вопросы в два простых шага.
+        </p>
+        <div class="divider"></div>
+        <button type="button" onclick="selectStep('secondStep')">
+          Начать
+        </button>
+      </section>
+      <section class="footnotes">
+        <small>
+          <sup>1</sup>
+          <a id="firstFootnote">
+            Приказ МВД России от 4 декабря 2019 г. N 907 пункт 27:
+            «Документы для продления срока действия обыкновенной рабочей либо учебной
+            визы должны быть представлены для рассмотрения не позднее чем за двадцать
+            рабочих дней до окончания срока действия имеющейся визы»
+          </a>
+        </small>
+        <br>
+        <small>
+          <sup>2</sup>
+          <a id="secondFootnote">
+            ПОСТАНОВЛЕНИЕ от 9 июня 2003 года N 335 пункт 47: «В случае выдачи учебной или рабочей
+            визы срок действия паспорта не должен истекать ранее
+            чем через 1,5 года с даты начала действия визы»
+          </a>
+        </small>
+      </section>
+    </div>
+    <div class="step" id="secondStep">
+      <section>
+        <p>
+          Найди дату окончания <b>ТВОЕЙ</b> действующей визы по образцу.
+        </p>
+        <p>
+          Образец на фото:
+          <br />
+          <a href="static/images/visa-example.jpg" class="js-smartphoto" data-id="visaExample">
+            <img class="example-image" src="static/images/visa-example.jpg" alt="visa-example">
+          </a>
+        </p>
+        <p>
+          Выбери эту дату на календаре:
+          <input type="text" placeholder="Выбрать дату" id="visaExpiryDate">
+        </p>
+        <div class="divider"></div>
+        <div class="button-group">
+          <button type="button" onclick="selectStep('thirdStep');" id="toThirdStepButton" disabled>
+            Далее
+          </button>
+          <button type="button" onclick="selectStep('firstStep')">
+            Назад
+          </button>
+        </div>
+      </section>
+    </div>
+    <div class="step" id="thirdStep">
+      <section>
+        <p>
+          Найди дату окончания <b>ТВОЕГО</b> действующего паспорта по образцу.
+        </p>
+        <p>
+          Образец на фото:
+          <br />
+          <a href="static/images/passport-example.jpg" class="js-smartphoto" data-id="passportExample">
+            <img class="example-image" src="static/images/passport-example.jpg" alt="passport-example">
+          </a>
+        </p>
+        <p>
+          Выбери эту дату на календаре:
+          <input type="text" placeholder="Выбрать дату" id="passportExpiryDate">
+        </p>
+        <div class="divider"></div>
+        <div class="button-group">
+          <button type="button" onclick="selectStep('fourthStep'); calculateResults();" id="toFourthStepButton"
+            disabled>
+            Далее
+          </button>
+          <button type="button" onclick="selectStep('secondStep')">
+            Назад
+          </button>
+        </div>
+      </section>
+    </div>
+    <div class="step" id="fourthStep">
+      <section>
+        <div class="result" id="firstResult">
+          <p>
+            Твой паспорт пока менять не нужно.
+          </p>
+          <p>
+            Крайняя дата подачи документов на визу: <b id="visaApplyDateResult"></b>
+          </p>
+          <p>
+            Напоминаем, что ты должен принести следующие документы:
+          </p>
+          <ul>
+            <li>Паспорт;</li>
+            <li>Миграционная карта;</li>
+            <li>1 фотография;</li>
+            <li>Чек из банка об оплате госпошлины 1600 рублей;</li>
+            <li>Деньги на страховой полис.</li>
+          </ul>
+        </div>
+        <div class="result" id="secondResult">
+          <p>
+            В данный момент в твой паспорт больше не вклеить визу, она последняя.
+          </p>
+          <p>
+            У тебя есть два варианта:
+          </p>
+          <ol>
+            <li>
+              Тебе необходимо выехать из России до (<b id="visaExpiryDateResult"></b>).
+              <br>
+              Поменять заканчивающийся паспорт в своей стране и ждать приглашение от ПетрГУ;
+            </li>
+            <li>
+              Тебе необходимо поменять паспорт и принести оба паспорта в регистрационно-визовый отдел в срок до (<b
+                id="visaApplyAltDateResult"></b>).
+              <br>
+              Помни, что посольства некоторых стран долго меняют паспорта (до 4 месяцев).
+              <br>
+              Займись этим заранее, чтобы успеть принести все документы на визу вовремя!
+            </li>
+          </ol>
+        </div>
+        <div class="divider"></div>
+        <div class="button-group">
+          <button type="button" onclick="selectStep('firstStep'); clearValues();">
+            Пройти заново
+          </button>
+          <button type="button" onclick="selectStep('thirdStep')">
+            Назад
+          </button>
+        </div>
+      </section>
+    </div>
+  </main>
+  <footer>
+    <small>
+      Регистрационно-визовый отдел ПетрГУ, 2020 г.
+    </small>
+  </footer>
+
+  <script type="text/javascript" src="scripts/libs/datepicker/datepicker.js"></script>
+  <script type="text/javascript" src="scripts/libs/smartphoto/smartphoto.js"></script>
+  <script type="text/javascript" src="scripts/index.js"></script>
+</body>
+
+</html>
