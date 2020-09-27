@@ -74,34 +74,6 @@
     <div class="step" id="secondStep">
       <section>
         <p>
-          Найди дату окончания <b>ТВОЕГО</b> действующего паспорта по образцу.
-        </p>
-        <p>
-          Образец на фото:
-          <br />
-          <a href="static/images/passport-example.jpg" class="js-smartphoto" data-id="passportExample">
-            <img class="example-image" src="static/images/passport-example.jpg" alt="passport-example">
-          </a>
-        </p>
-        <p>
-          Выбери эту дату на календаре:
-          <input type="date" id="passportExpiryDate"
-            onchange="selectVisaExpiryDate(this); changeButtonState(this, 'toThirdStepButton')">
-        </p>
-        <div class="divider"></div>
-        <div class="button-group">
-          <button type="button" onclick="selectStep('thirdStep')" id="toThirdStepButton" disabled>
-            Далее
-          </button>
-          <button type="button" onclick="selectStep('firstStep')">
-            Назад
-          </button>
-        </div>
-      </section>
-    </div>
-    <div class="step" id="thirdStep">
-      <section>
-        <p>
           Найди дату окончания <b>ТВОЕЙ</b> действующей визы по образцу.
         </p>
         <p>
@@ -114,12 +86,40 @@
         <p>
           Выбери эту дату на календаре:
           <input type="date" id="visaExpiryDate"
-            onchange="selectPassportExpiryDate(this); changeButtonState(this, 'toFourthStepButton')">
+            onchange="selectPassportExpiryDate(this); changeButtonState(this, 'toThirdStepButton')">
         </p>
         <div class="divider"></div>
         <div class="button-group">
-          <button type="button" onclick="selectStep('fourthStep'); calculateResults();" id="toFourthStepButton"
+          <button type="button" onclick="selectStep('thirdStep'); calculateResults();" id="toThirdStepButton"
             disabled>
+            Далее
+          </button>
+          <button type="button" onclick="selectStep('firstStep')">
+            Назад
+          </button>
+        </div>
+      </section>
+    </div>
+    <div class="step" id="thirdStep">
+      <section>
+        <p>
+          Найди дату окончания <b>ТВОЕГО</b> действующего паспорта по образцу.
+        </p>
+        <p>
+          Образец на фото:
+          <br />
+          <a href="static/images/passport-example.jpg" class="js-smartphoto" data-id="passportExample">
+            <img class="example-image" src="static/images/passport-example.jpg" alt="passport-example">
+          </a>
+        </p>
+        <p>
+          Выбери эту дату на календаре:
+          <input type="date" id="passportExpiryDate"
+            onchange="selectVisaExpiryDate(this); changeButtonState(this, 'toFourthStepButton')">
+        </p>
+        <div class="divider"></div>
+        <div class="button-group">
+          <button type="button" onclick="selectStep('fourthStep')" id="toFourthStepButton" disabled>
             Далее
           </button>
           <button type="button" onclick="selectStep('secondStep')">
