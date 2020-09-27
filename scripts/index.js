@@ -1,6 +1,7 @@
 new SmartPhoto(".js-smartphoto");
 
 const $_STEPS = document.getElementsByClassName('step')
+const $_RESULTS = document.getElementsByClassName('result')
 const $_PASSPORT_EXPIRY_DATE = document.getElementById('passportExpiryDate')
 const $_VISA_EXPIRY_DATE = document.getElementById('visaExpiryDate')
 const MIN_DATE = new Date().toISOString().substring(0, 10);
@@ -24,6 +25,8 @@ function selectStep(id) {
   }
 
   $_CURRENT_STEP.style = "display: flex;"
+
+  window.scrollTo(0, 0);
 }
 
 function selectPassportExpiryDate(input) {
@@ -101,4 +104,8 @@ function calculateResults() {
 function clearValues() {
   $_PASSPORT_EXPIRY_DATE.value = null
   $_VISA_EXPIRY_DATE.value = null
+
+  for (let item of $_RESULTS) {
+    item.style = "display: none;"
+  }
 }
