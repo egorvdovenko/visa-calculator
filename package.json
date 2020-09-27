@@ -1,0 +1,22 @@
+{
+  "name": "visa-calculator",
+  "version": "1.0.0",
+  "description": "Visa application deadline calculator",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/egorvdovenko/visa-calculator.git"
+  },
+  "author": "Egor Vdovenko (yodaskillme@gmail.com)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/egorvdovenko/visa-calculator/issues"
+  },
+  "homepage": "https://github.com/egorvdovenko/visa-calculator#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
