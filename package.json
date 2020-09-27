@@ -3,11 +3,11 @@
   "version": "1.0.0",
   "description": "Visa application deadline calculator",
   "engines": {
-    "node": "12.x",
-    "start": "node server.js"
+    "node": "12.x"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
