@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="shortcut icon" href="static/favicons/favicon.ico" type="image/x-icon">
-  <title>Visa calculator</title>
+  <title>Visa Calculator</title>
   <link rel="stylesheet" href="styles/libs/datepicker/datepicker.css">
   <link rel="stylesheet" href="styles/libs/smartphoto/smartphoto.css">
   <link rel="stylesheet" href="styles/index.css">
@@ -15,59 +15,54 @@
   <header>
     <a id="indexLink" href="/">
       <object type="image/svg+xml" data="static/icons/passport-icon.svg"></object>
-      Visa calculator
+      Visa Calculator
     </a>
   </header>
   <main class="container container_main">
     <div class="step" id="firstStep">
       <section>
-        <p>Уважаемый иностранный студент ПетрГУ! На этом сайте ты можешь узнать ответы на два важных вопроса:</p>
+        <p>Dear international student of PetrSU! Here you can find answers to the following important questions:</p>
         <ul>
           <li>
-            Когда тебе сдавать документы на продление визы?
+            When is the deadline to submit your documents for visa extension?
           </li>
           <li>
-            Когда тебе нужно менять паспорт?
+            When do you need to reissue your passport?
           </li>
         </ul>
-        <p>Напоминаем тебе, что в соответствии с действующим законодательством РФ:</p>
+        <p>We remind you that in accordance with the current legislation of the Russian Federation:</p>
         <ul>
           <li>
-            Документы на продление визы подаются не менее чем за
-            <a href="#firstFootnote">20 рабочих дней (календарный месяц)<sup>1</sup></a>
-            до окончания действующей визы при наличии действующего паспорта;
+            You must submit your documents for visa extension at least
+            <a href="#firstFootnote">20 working days (calendar month)<sup>1</sup></a>
+            before your current visa expires if your passport is valid;
           </li>
           <li>
-            При подаче документов на продление визы твой паспорт должен быть действителен
-            <a href="#secondFootnote">не менее 18 месяцев<sup>2</sup></a>
-            с даты начала действия следующей визы;
+            To apply for visa extension your passport must be valid for at least 
+            <a href="#secondFootnote">18 months<sup>2</sup></a>
+            from the start date of the next visa;
           </li>
         </ul>
         <p>
-          Узнай ответы на эти вопросы в два простых шага.
+          Find out the answers to these questions in two simple steps.
         </p>
         <div class="divider"></div>
         <button type="button" onclick="selectStep('secondStep')">
-          Начать
+          Start
         </button>
       </section>
       <section class="footnotes">
         <small>
           <sup>1</sup>
           <a id="firstFootnote">
-            Приказ МВД России от 4 декабря 2019 г. N 907 пункт 27:
-            «Документы для продления срока действия обыкновенной рабочей либо учебной
-            визы должны быть представлены для рассмотрения не позднее чем за двадцать
-            рабочих дней до окончания срока действия имеющейся визы»
+            Link to the decree in Russian: http://base.garant.ru/73421575/
           </a>
         </small>
         <br>
         <small>
           <sup>2</sup>
           <a id="secondFootnote">
-            ПОСТАНОВЛЕНИЕ от 9 июня 2003 года N 335 пункт 47: «В случае выдачи учебной или рабочей
-            визы срок действия паспорта не должен истекать ранее
-            чем через 1,5 года с даты начала действия визы»
+            Link to the Government Regulation in Russian: http://www.garant.ru/hotlaw/federal/88817/
           </a>
         </small>
       </section>
@@ -75,26 +70,26 @@
     <div class="step" id="secondStep">
       <section>
         <p>
-          Найди дату окончания <b>ТВОЕЙ</b> действующей визы по образцу.
+          Find the expiry date of <b>YOUR</b> current visa using the example below.
         </p>
         <p>
-          Образец на фото:
+          The example on the photo:
           <br />
           <a href="static/images/visa-example.jpg" class="js-smartphoto" data-id="visaExample">
             <img class="example-image" src="static/images/visa-example.jpg" alt="visa-example">
           </a>
         </p>
         <p>
-          Выбери эту дату на календаре:
+          Choose the expiry date of your visa on the calendar:
           <input type="text" placeholder="Выбрать дату" id="visaExpiryDate">
         </p>
         <div class="divider"></div>
         <div class="button-group">
           <button type="button" onclick="selectStep('thirdStep');" id="toThirdStepButton" disabled>
-            Далее
+            Next
           </button>
           <button type="button" onclick="selectStep('firstStep')">
-            Назад
+            Back
           </button>
         </div>
       </section>
@@ -102,27 +97,27 @@
     <div class="step" id="thirdStep">
       <section>
         <p>
-          Найди дату окончания <b>ТВОЕГО</b> действующего паспорта по образцу.
+          НFind the expiry date of <b>YOUR</b> current passport using the example below.
         </p>
         <p>
-          Образец на фото:
+          The example on the photo:
           <br />
           <a href="static/images/passport-example.jpg" class="js-smartphoto" data-id="passportExample">
             <img class="example-image" src="static/images/passport-example.jpg" alt="passport-example">
           </a>
         </p>
         <p>
-          Выбери эту дату на календаре:
+          Choose the expiry date of your passport on the calendar:
           <input type="text" placeholder="Выбрать дату" id="passportExpiryDate">
         </p>
         <div class="divider"></div>
         <div class="button-group">
           <button type="button" onclick="selectStep('fourthStep'); calculateResults();" id="toFourthStepButton"
             disabled>
-            Далее
+            Next
           </button>
           <button type="button" onclick="selectStep('secondStep')">
-            Назад
+            Back
           </button>
         </div>
       </section>
@@ -131,52 +126,63 @@
       <section>
         <div class="result" id="firstResult">
           <p>
-            Твой паспорт пока менять не нужно.
+            You don't need to reissue your passport yet.
           </p>
           <p>
-            Крайняя дата подачи документов на визу: <b id="visaApplyDateResult"></b>
+            The deadline of applying for visa is: <b id="visaApplyDateResult"></b>
           </p>
           <p>
-            Напоминаем, что ты должен принести следующие документы:
+            Please note that you shall bring the following documents:
           </p>
           <ul>
-            <li>Паспорт;</li>
-            <li>Миграционная карта;</li>
-            <li>1 фотография;</li>
-            <li>Чек из банка об оплате госпошлины 1600 рублей;</li>
-            <li>Деньги на страховой полис.</li>
+            <li>Passport;</li>
+            <li>Migration card;</li>
+            <li>1 photo;</li>
+            <li>Receipt from a bank for state fee 1,600 rubles;</li>
+            <li>Money for an insurance policy.</li>
           </ul>
         </div>
         <div class="result" id="secondResult">
           <p>
-            В данный момент в твой паспорт больше не вклеить визу, она последняя.
+            Now you cannot get another visa in your current passport, it is the last one!
           </p>
           <p>
-            У тебя есть два варианта:
+            You have two options:
           </p>
           <ol>
             <li>
-              Тебе необходимо выехать из России до (<b id="visaExpiryDateResult"></b>).
+              You need to leave Russia before (<b id="visaExpiryDateResult"></b>).
               <br>
-              Поменять заканчивающийся паспорт в своей стране и ждать приглашение от ПетрГУ;
+              Reissue the expiring passport in your country and wait for an invitation from PetrSU;
+              <br> 
+              Attention! This is the only option for Turkmenistan citizens.
             </li>
             <li>
-              Тебе необходимо поменять паспорт и принести оба паспорта в регистрационно-визовый отдел в срок до (<b
+              You need to reissue your passport at the embassy of your country in Russia and bring both passports to the Visa and Registration Department of PetrSU before (<b
                 id="visaApplyAltDateResult"></b>).
               <br>
-              Помни, что посольства некоторых стран долго меняют паспорта (до 4 месяцев).
+              Note that embassies of some countries take up to 2 months to reissue passports.
               <br>
-              Займись этим заранее, чтобы успеть принести все документы на визу вовремя!
+              Do this in advance so that you can bring all your visa documents on time!
             </li>
+            <p>
+              Please note that you must bring the following documents:
+            </p>
+            <ul>
+              <li>Passport;</li>
+              <li>Migration card;</li>
+              <li>2 photos;</li>
+              <li>2 receipts from a bank for state fee (each 1600 rubles);</li>
+              <li>Money for an insurance policy.</li>
           </ol>
         </div>
         <div class="divider"></div>
         <div class="button-group">
           <button type="button" onclick="selectStep('firstStep'); clearValues();">
-            Пройти заново
+            Repeat
           </button>
           <button type="button" onclick="selectStep('thirdStep')">
-            Назад
+            Back
           </button>
         </div>
       </section>
@@ -184,7 +190,7 @@
   </main>
   <footer>
     <small>
-      Регистрационно-визовый отдел ПетрГУ, 2020 г.
+      Registration and Visa Department of PetrSU, 2020.
     </small>
   </footer>
 
