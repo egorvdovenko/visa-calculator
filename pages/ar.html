@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="static/favicons/favicon.ico" type="image/x-icon">
+  <title>Визовый калькулятор</title>
+  <link rel="stylesheet" href="styles/libs/datepicker/datepicker.css">
+  <link rel="stylesheet" href="styles/libs/smartphoto/smartphoto.css">
+  <link rel="stylesheet" href="styles/index.css">
+</head>
+
+<body>
+  <header>
+    <a id="indexLink" href="/">
+      <object type="image/svg+xml" data="static/icons/passport-icon.svg"></object>
+      Визовый калькулятор
+    </a>
+  </header>
+  <main class="container container_main">
+    <div class="step" id="firstStep">
+      <section>
+        <p>عزيزي الطالب! في هذه الصفحة ستجد اجوبة اهم سؤالين:</p>
+        <ul>
+          <li>
+            متى يجب تسليم جواز السفر لتمديد الفيزا؟
+          </li>
+          <li>
+            متى يجب تغير جواز السفر؟
+          </li>
+        </ul>
+        <p>نذكرك، أنه وفقًا للتشريعات الحالية للاتحاد الروسي:</p>
+        <ul>
+          <li>
+            يجب تسليم جواز سفرك لتمديد الفيزا
+            <a href="#firstFootnote">(شهر تقويمي) من <sup>1</sup></a>
+            قبل ٢٠ يوم عمل  مدة انتهاء الفيزا بالجواز ساري المفعول؛
+          </li>
+          <li>
+            عند التقدم بطلب لتمديد الفيزا ، يجب 
+            <a href="#secondFootnote">لمدة 18<sup>2</sup></a>
+            أن يكون جواز سفرك صالحً شهرًا على الأقل من تاريخ بدء الفيزا التالية ؛
+          </li>
+        </ul>
+        <p>
+          تعرف على الاجوبة بخطوتين بسيطتين.
+        </p>
+        <div class="divider"></div>
+        <button type="button" onclick="selectStep('secondStep')">
+          لنبدأ
+        </button>
+      </section>
+      <section class="footnotes">
+        <small>
+          <sup>1</sup>
+          <a id="firstFootnote">
+            Ссылка на Приказ МВД на русском языке: http://base.garant.ru/73421575/
+          </a>
+        </small>
+        <br>
+        <small>
+          <sup>2</sup>
+          <a id="secondFootnote">
+            Ссылка на Постановление Правительства РФ на русском языке: http://www.garant.ru/hotlaw/federal/88817/
+          </a>
+        </small>
+      </section>
+    </div>
+    <div class="step" id="secondStep">
+      <section>
+        <p>
+          اعثر على تاريخ انتهاء الفيزا، كما في المثال.
+        </p>
+        <p>
+          انظر الى الصورة:
+          <br />
+          <a href="static/images/visa-example.jpg" class="js-smartphoto" data-id="visaExample">
+            <img class="example-image" src="static/images/visa-example.jpg" alt="visa-example">
+          </a>
+        </p>
+        <p>
+          اختر تاريخ انتهاء الفيزا بالتقويم:
+          <input type="text" placeholder="اختر تاريخ" id="visaExpiryDate">
+        </p>
+        <div class="divider"></div>
+        <div class="button-group">
+          <button type="button" onclick="selectStep('thirdStep');" id="toThirdStepButton" disabled>
+            التالي
+          </button>
+          <button type="button" onclick="selectStep('firstStep')">
+            Назад
+          </button>
+        </div>
+      </section>
+    </div>
+    <div class="step" id="thirdStep">
+      <section>
+        <p>
+          اعثر على تاريخ انتهاء جواز سفرك، كما في المثال.
+        </p>
+        <p>
+          انظر الى الصورة:
+          <br />
+          <a href="static/images/passport-example.jpg" class="js-smartphoto" data-id="passportExample">
+            <img class="example-image" src="static/images/passport-example.jpg" alt="passport-example">
+          </a>
+        </p>
+        <p>
+          اختر تاريخ انتهاء جواز سفرك على التقويم:
+          <input type="text" placeholder="اختر تاريخ" id="passportExpiryDate">
+        </p>
+        <div class="divider"></div>
+        <div class="button-group">
+          <button type="button" onclick="selectStep('fourthStep'); calculateResults();" id="toFourthStepButton"
+            disabled>
+            التالي 
+          </button>
+          <button type="button" onclick="selectStep('secondStep')">
+            Назад
+          </button>
+        </div>
+      </section>
+    </div>
+    <div class="step" id="fourthStep">
+      <section>
+        <div class="result" id="firstResult">
+          <p>
+            لست بحاجة إلى تغيير جواز سفرك حتى الآن.
+          </p>
+          <p>
+            الموعد النهائي لتقديم جواز السفر للحصول على الفيزا: <b id="visaApplyDateResult"></b>
+          </p>
+          <p>
+            نذكرك أنه يجب عليك إحضار المستندات التالية:
+          </p>
+          <ul>
+            <li>جواز السفر؛</li>
+            <li>بطاقة الهجرة؛</li>
+            <li>صورة واحدة؛</li>
+            <li>ايصال دفع من البنك بقيمة ١٦٠٠ روبل؛</li>
+            <li>مبلغ مالي لتأمين الصحي.</li>
+          </ul>
+        </div>
+        <div class="result" id="secondResult">
+          <p>
+            في الوقت الحالي لا تستطيع ان تحصل على فيزا في جواز السفر الحالي. (انتهاء جواز السفر).
+          </p>
+          <p>
+            لديك خياران
+          </p>
+          <ol>
+            <li>
+              يجب عليك مغادرة روسيا (<b id="visaExpiryDateResult"></b>).
+              <br>
+              تجديد جواز السفر ومن ثم انتظار دعوة سفر من الجامعة؛
+              <br> 
+              Внимание! Для граждан Туркменистана - это единственный вариант.
+            </li>
+            <li>
+              تجديد جواز السفر في السفارة التابعة لبلدك في روسيا ومن ثم احضار جوازين السفر لقسم التأشيرات (<b
+                id="visaApplyAltDateResult"></b>).
+              <br>
+              تذكر انه بعض السفارات تستغرق وقت طويل في تجديد جواز السفر (٤ اشهر).
+              <br>
+              قم بهذه الإجراءات مقدمًا حتى يكون لديك الوقت لإحضار جميع مستندات التأشيرة في الوقت المحدد!
+            </li>
+            <p>
+              نذكرك أنه يجب عليك إحضار المستندات التالية:
+            </p>
+            <ul>
+              <li>جواز السفر؛;</li>
+              <li>بطاقة الهجرة؛</li>
+              <li>صورتين؛</li>
+              <li>ايصالين دفع من البنك بقيمة ١٦٠٠ روبل؛</li>
+              <li>مبلغ مالي لتأمين الصحي.</li>
+          </ol>
+        </div>
+        <div class="divider"></div>
+        <div class="button-group">
+          <button type="button" onclick="selectStep('firstStep'); clearValues();">
+            اعادة
+          </button>
+          <button type="button" onclick="selectStep('thirdStep')">
+            Назад
+          </button>
+        </div>
+      </section>
+    </div>
+  </main>
+  <footer>
+    <small>
+      Регистрационно-визовый отдел ПетрГУ, 2020 г.
+    </small>
+  </footer>
+
+  <script type="text/javascript" src="scripts/libs/datepicker/datepicker.js"></script>
+  <script type="text/javascript" src="scripts/libs/smartphoto/smartphoto.js"></script>
+  <script type="text/javascript" src="scripts/index.js"></script>
+</body>
+
+</html>
