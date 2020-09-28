@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="static/favicons/favicon.ico" type="image/x-icon">
+  <title>Визовый калькулятор</title>
+  <link rel="stylesheet" href="styles/libs/datepicker/datepicker.css">
+  <link rel="stylesheet" href="styles/libs/smartphoto/smartphoto.css">
+  <link rel="stylesheet" href="styles/index.css">
+</head>
+
+<body>
+  <header>
+    <a id="indexLink" href="/">
+      <object type="image/svg+xml" data="static/icons/passport-icon.svg"></object>
+      Визовый калькулятор
+    </a>
+  </header>
+  <main class="container container_main">
+    <div class="step" id="firstStep">
+      <section>
+        <p>Hormatly daşary ýurt talyby! Bu saýtda sen iki sany wajyp soraga jogap taparsyň:</p>
+        <ul>
+          <li>
+            Wizanyň möhletini uzaltmak üçin haçan resminamalaryňy tabşyrmaly?
+          </li>
+          <li>
+            Haçan pasportyňy çalyşmaly?
+          </li>
+        </ul>
+        <p>Russiýa Federasiýasynyň häzirki wagtdaky kada-kanunlyklaryna laýyklykda:</p>
+        <ul>
+          <li>
+            Wiza möhletini uzaltmak üçin resminamalar häzirki wizanyň möhletiniň dolmagyna azyndan
+            <a href="#firstFootnote">20 gün (iş günleri)<sup>1</sup></a>
+            galanda tabşyrylmaly we pasportyň möhleti dolmadyk bolmaly;
+          </li>
+          <li>
+            Wizanyň möhletini uzaltmak üçin resminamalary tabşyraňda, seniň pasportyň möhleti indiki wizanyň başlanýan möhletinden 
+            <a href="#secondFootnote">azyndan 18 aýdan<sup>2</sup></a>
+            soň dolmaly;
+          </li>
+        </ul>
+        <p>
+          Şu soraglara aňsat jogap tapmak üçin ýönekeý iki ädim gerek.
+        </p>
+        <div class="divider"></div>
+        <button type="button" onclick="selectStep('secondStep')">
+          Başlamak
+        </button>
+      </section>
+      <section class="footnotes">
+        <small>
+          <sup>1</sup>
+          <a id="firstFootnote">
+            Ссылка на Приказ МВД на русском языке: http://base.garant.ru/73421575/
+          </a>
+        </small>
+        <br>
+        <small>
+          <sup>2</sup>
+          <a id="secondFootnote">
+            Ссылка на Постановление Правительства РФ на русском языке: http://www.garant.ru/hotlaw/federal/88817/
+          </a>
+        </small>
+      </section>
+    </div>
+    <div class="step" id="secondStep">
+      <section>
+        <p>
+          Nusgada görkezilşi ýaly, <b>ÖZ</b> pasportyňda şu wagtky wizaň gutarýan möhletini tap.
+        </p>
+        <p>
+          Suratda nusga görkezilen:
+          <br />
+          <a href="static/images/visa-example.jpg" class="js-smartphoto" data-id="visaExample">
+            <img class="example-image" src="static/images/visa-example.jpg" alt="visa-example">
+          </a>
+        </p>
+        <p>
+          Öz wizaň möhletiniň dolýan senesini kalendarda saýla:
+          <input type="text" placeholder="Выбрать дату" id="visaExpiryDate">
+        </p>
+        <div class="divider"></div>
+        <div class="button-group">
+          <button type="button" onclick="selectStep('thirdStep');" id="toThirdStepButton" disabled>
+            Yzy
+          </button>
+          <button type="button" onclick="selectStep('firstStep')">
+            Назад
+          </button>
+        </div>
+      </section>
+    </div>
+    <div class="step" id="thirdStep">
+      <section>
+        <p>
+          Nusgada görkezilşi ýaly, <b>ÖZ</b> pasportyň gutarýan möhletini tap.
+        </p>
+        <p>
+          Suratda nusga görkezilen:
+          <br />
+          <a href="static/images/passport-example.jpg" class="js-smartphoto" data-id="passportExample">
+            <img class="example-image" src="static/images/passport-example.jpg" alt="passport-example">
+          </a>
+        </p>
+        <p>
+          Pasportyň möhletiniň dolýan senesini kalendarda saýla:
+          <input type="text" placeholder="Выбрать дату" id="passportExpiryDate">
+        </p>
+        <div class="divider"></div>
+        <div class="button-group">
+          <button type="button" onclick="selectStep('fourthStep'); calculateResults();" id="toFourthStepButton"
+            disabled>
+            Yzy
+          </button>
+          <button type="button" onclick="selectStep('secondStep')">
+            Назад
+          </button>
+        </div>
+      </section>
+    </div>
+    <div class="step" id="fourthStep">
+      <section>
+        <div class="result" id="firstResult">
+          <p>
+            Saňa pasportyňy çalyşmak şu wagt hökman däl.
+          </p>
+          <p>
+            Wiza möhletini uzaltmak üçin soňky sene: <b id="visaApplyDateResult"></b>
+          </p>
+          <p>
+            Getirmeli resminamalaryňy ýatladýarys:
+          </p>
+          <ul>
+            <li>Pasport;</li>
+            <li>Migrasiýa karty;</li>
+            <li>1 surat;</li>
+            <li>Bankdan 1600 rubl gümrük hakyny töländigiňi tassyklaýan çek;</li>
+            <li>Ätiýaçlandyryş gullugy üçin pul.</li>
+          </ul>
+        </div>
+        <div class="result" id="secondResult">
+          <p>
+            Indi seniň pasportyňa täze wiza goýulmaýar, häzirkiň iň soňky!
+          </p>
+          <ol>
+            <li>
+              Bellenilen möhlete çenli sen Russiýadan gitmeli (<b id="visaExpiryDateResult"></b>).
+              <br>
+              Möhleti dolup barýan pasportyňy öz ýurduňda çalyşmaly we PetrDU-dan çakylyga garaşmaly;
+              <br>
+            </li>
+          </ol>
+        </div>
+        <div class="divider"></div>
+        <div class="button-group">
+          <button type="button" onclick="selectStep('firstStep'); clearValues();">
+            Täzeden geçmek
+          </button>
+          <button type="button" onclick="selectStep('thirdStep')">
+            Назад
+          </button>
+        </div>
+      </section>
+    </div>
+  </main>
+  <footer>
+    <small>
+      Регистрационно-визовый отдел ПетрГУ, 2020 г.
+    </small>
+  </footer>
+
+  <script type="text/javascript" src="scripts/libs/datepicker/datepicker.js"></script>
+  <script type="text/javascript" src="scripts/libs/smartphoto/smartphoto.js"></script>
+  <script type="text/javascript" src="scripts/index.js"></script>
+</body>
+
+</html>
