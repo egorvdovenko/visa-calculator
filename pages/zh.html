@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="static/favicons/favicon.ico" type="image/x-icon">
+  <title>Визовый калькулятор</title>
+  <link rel="stylesheet" href="styles/libs/datepicker/datepicker.css">
+  <link rel="stylesheet" href="styles/libs/smartphoto/smartphoto.css">
+  <link rel="stylesheet" href="styles/index.css">
+</head>
+
+<body>
+  <header>
+    <a id="indexLink" href="/">
+      <object type="image/svg+xml" data="static/icons/passport-icon.svg"></object>
+      Визовый калькулятор
+    </a>
+  </header>
+  <main class="container container_main">
+    <div class="step" id="firstStep">
+      <section>
+        <p>У尊敬的彼得罗扎沃茨克国立大学的外国学生! 在这个网站上你可以找到以下两个重要问题的答案:</p>
+        <ul>
+          <li>
+            递交签证延期材料的截止日期是什么时候?
+          </li>
+          <li>
+            你什么时候需要更换护照?
+          </li>
+        </ul>
+        <p>我们提醒你，根据俄罗斯联邦现行法律：</p>
+        <ul>
+          <li>
+            如果你的护照有效，你必须在当前签证到期前至少
+            <a href="#firstFootnote">20个工作日(日历月份)<sup>1</sup></a>
+            提交你的签证延期文件;
+          </li>
+          <li>
+            申请签证延期，你的护照从下一次签证开始日期起必须至少有效
+            <a href="#secondFootnote">18个月<sup>2</sup></a>;
+          </li>
+        </ul>
+        <p>
+          通过两个简单的步骤找到这些问题的答案。
+        </p>
+        <div class="divider"></div>
+        <button type="button" onclick="selectStep('secondStep')">
+          Начать
+        </button>
+      </section>
+      <section class="footnotes">
+        <small>
+          <sup>1</sup>
+          <a id="firstFootnote">
+            Ссылка на Приказ МВД на русском языке: http://base.garant.ru/73421575/
+          </a>
+        </small>
+        <br>
+        <small>
+          <sup>2</sup>
+          <a id="secondFootnote">
+            Ссылка на Постановление Правительства РФ на русском языке: http://www.garant.ru/hotlaw/federal/88817/
+          </a>
+        </small>
+      </section>
+    </div>
+    <div class="step" id="secondStep">
+      <section>
+        <p>
+          通过下面的示例查找 <b>你</b> 当前签证的到期日期。
+        </p>
+        <p>
+          照片上的示例:
+          <br />
+          <a href="static/images/visa-example.jpg" class="js-smartphoto" data-id="visaExample">
+            <img class="example-image" src="static/images/visa-example.jpg" alt="visa-example">
+          </a>
+        </p>
+        <p>
+          在日历上选择你的签证的到期日期:
+          <input type="text" placeholder="Выбрать дату" id="visaExpiryDate">
+        </p>
+        <div class="divider"></div>
+        <div class="button-group">
+          <button type="button" onclick="selectStep('thirdStep');" id="toThirdStepButton" disabled>
+            接下来
+          </button>
+          <button type="button" onclick="selectStep('firstStep')">
+            Назад
+          </button>
+        </div>
+      </section>
+    </div>
+    <div class="step" id="thirdStep">
+      <section>
+        <p>
+          通过下面的示例查找 <b>你</b> 当前护照的过期日期。
+        </p>
+        <p>
+          照片上的示例：
+          <br />
+          <a href="static/images/passport-example.jpg" class="js-smartphoto" data-id="passportExample">
+            <img class="example-image" src="static/images/passport-example.jpg" alt="passport-example">
+          </a>
+        </p>
+        <p>
+          在日历上选择你的签证的到期日期:
+          <input type="text" placeholder="Выбрать дату" id="passportExpiryDate">
+        </p>
+        <div class="divider"></div>
+        <div class="button-group">
+          <button type="button" onclick="selectStep('fourthStep'); calculateResults();" id="toFourthStepButton"
+            disabled>
+            接下来
+          </button>
+          <button type="button" onclick="selectStep('secondStep')">
+            Назад
+          </button>
+        </div>
+      </section>
+    </div>
+    <div class="step" id="fourthStep">
+      <section>
+        <div class="result" id="firstResult">
+          <p>
+            你现在还不需要重新更换护照。
+          </p>
+          <p>
+            申请签证文件的提交截止日期为: <b id="visaApplyDateResult"></b>
+          </p>
+          <p>
+            请注意，你需要携带下列文件:
+          </p>
+          <ul>
+            <li>护照；</li>
+            <li>移居证；</li>
+            <li>1张照片；</li>
+            <li>关于支付1600卢布的银行国税收据；</li>
+            <li>买保险的钱。</li>
+          </ul>
+        </div>
+        <div class="result" id="secondResult">
+          <p>
+            现在你的护照不能再办签证了，这是最后一个了!
+          </p>
+          <p>
+            你有两个方案（可选择）：
+          </p>
+          <ol>
+            <li>
+              你必须早点离开俄罗斯 (<b id="visaExpiryDateResult"></b>).
+              <br>
+              在贵国更换过期护照，等待彼得罗扎沃茨克国立大学的邀请;
+              <br> 
+              Внимание! Для граждан Туркменистана - это единственный вариант.
+            </li>
+            <li>
+              你必须先到贵国驻俄罗斯大使馆办理护照补办手续，并如期将两本护照一并带到彼得罗扎沃茨克国立大学签证登记部门办理 (<b
+                id="visaApplyAltDateResult"></b>).
+              <br>
+              请谨记，有些国家的大使馆需要4个月才能重新更换护照。
+              <br>
+              提前做好准备，这样你就可以成功地按时携带所有的签证文件!
+            </li>
+            <p>
+              请注意，你必须携带下列文件:
+            </p>
+            <ul>
+              <li>护照；</li>
+              <li>移居证；</li>
+              <li>两张照片；</li>
+              <li>22张支付的银行的国税收据(每张1600卢布);</li>
+              <li>买保险的钱。</li>
+          </ol>
+        </div>
+        <div class="divider"></div>
+        <div class="button-group">
+          <button type="button" onclick="selectStep('firstStep'); clearValues();">
+            重复
+          </button>
+          <button type="button" onclick="selectStep('thirdStep')">
+            Назад
+          </button>
+        </div>
+      </section>
+    </div>
+  </main>
+  <footer>
+    <small>
+      Регистрационно-визовый отдел ПетрГУ, 2020 г.
+    </small>
+  </footer>
+
+  <script type="text/javascript" src="scripts/libs/datepicker/datepicker.js"></script>
+  <script type="text/javascript" src="scripts/libs/smartphoto/smartphoto.js"></script>
+  <script type="text/javascript" src="scripts/index.js"></script>
+</body>
+
+</html>
